@@ -13,8 +13,12 @@ import java.util.stream.StreamSupport;
 
 @Bean
 public class TodoRepository {
-    @Inject
-    MongoClient mongoClient;
+
+    private final MongoClient mongoClient;
+
+    public TodoRepository(MongoClient mongoClient) {
+        this.mongoClient = mongoClient;
+    }
 
     public List<Todo> getAll() {
         MongoCollection<Todo> collection = JacksonMongoCollection.builder().build(mongoClient,
